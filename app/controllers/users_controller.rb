@@ -12,16 +12,18 @@ class UsersController < ApplicationController
   end 
   # GET /users
   def index
-    url = "http://127.0.0.1:3000/users/1/posts"
-    response=RestClient.get(url)
-    render json: response
-    # (1..10).each do |t|
-    #   render text: response
-    # end 
+    # url = "http://127.0.0.1:3000/users/1/posts"
+    # response=RestClient.get(url)
+    # render json: response
+    # # (1..10).each do |t|
+    # #   render text: response
+    # # end 
 
-    @users = User.all
-
-    # render json: @users
+    if params[:search].blank?
+      @users = User.all
+    end 
+    @user=User.where(search: "#{params[:search]}")
+    render json: @users
   end
 
   # GET /users/1

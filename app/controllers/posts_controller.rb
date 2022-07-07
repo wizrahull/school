@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
-
+ 
   # GET /posts
-  def index
+  def index 
+     
+
      @user=User.find(params[:user_id])
      render json:  @user.posts.all
      
@@ -29,10 +31,10 @@ class PostsController < ApplicationController
     
 
     if @post.save
-      render json: @post, status: :created, location: @post , notice: "Testing notice"
+      render json: @post, status: :created
 
     else
-      render json: @post.errors, status: :unprocessable_entity ,notice: "Testing notice"
+      render json: @post.errors
     end
   end
 
